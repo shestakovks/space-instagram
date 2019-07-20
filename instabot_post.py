@@ -26,7 +26,6 @@ if __name__ == '__main__':
         path = joinpath(directory, photo)
         if isfile(path):
             photo_path = path
-            # It is not a feature. It is necessity.
             new_photo_path = process_image(photo_path)
             bot.upload_photo(new_photo_path)
             shutil.move(photo_path, joinpath(posted_directory, photo))
