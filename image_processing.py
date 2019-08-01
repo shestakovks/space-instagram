@@ -25,8 +25,8 @@ def resize_horizontal(image, max_width=1080):
     return resized_image
 
 
-def resize_vertical(image, max_height=1350):
-    new_image = resize_horizontal(image)
+def resize_vertical(image, max_width=1080, max_height=1350):
+    new_image = resize_horizontal(image, max_width=max_width)
     if new_image.height <= max_height:
         return new_image
     delta_height = new_image.height - max_height
@@ -46,9 +46,10 @@ def process_image(path_to_file, max_width=1080, max_height=1350):
     if image.width <= max_width and image.height <= max_height:
         return path_to_file
     if image.width > image.height:
-        new_image = resize_horizontal(image)
+        new_image = resize_horizontal(image, max_width=max_width)
     else:
-        new_image = resize_vertical(image)
+        new_image = resize_vertical(
+            image, max_width=max_width, max_height=max_height)
     new_path = get_new_path(path_to_file)
     save_image(new_image, new_path)
     return new_path
